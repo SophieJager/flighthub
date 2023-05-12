@@ -10,4 +10,4 @@ stop: ## Connect on a remote bash terminal on the php container
 	$(DOCKER_COMPOSE) down
 
 status: ## Check container status
-	$(DOCKER_COMPOSE_DEV) ps
+	$(DOCKER_COMPOSE) ps
