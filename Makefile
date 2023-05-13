@@ -5,7 +5,7 @@ install: ## First Install of the project : build container, install component, b
 	$(DOCKER_COMPOSE) build
 	$(DOCKER_COMPOSE) run --rm php bash -ci 'composer install'
 	$(DOCKER_COMPOSE) run --rm php bash -ci 'php bin/console doctrine:migration:migrate --no-interaction'
-	#$(DOCKER_COMPOSE) run --rm php bash -ci 'php bin/console doctrine:fixtures:load -n'
+	$(DOCKER_COMPOSE) run --rm php bash -ci 'php bin/console doctrine:fixtures:load -n'
 
 connect: ## Connect on a remote bash terminal on the php container
 	$(DOCKER_COMPOSE) exec php bash
