@@ -22,3 +22,18 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    #region Manager
+    App\Contract\Manager\Api\AirlineManagerInterface:
+        alias: 'App\Manager\Api\AirlineManager'
+        public: true
+    App\Contract\Manager\Api\AirportManagerInterface:
+        alias: 'App\Manager\Api\AirportManager'
+        public: true
+    App\Contract\Manager\Api\CityManagerInterface:
+        alias: 'App\Manager\Api\CityManager'
+        public: true
+    App\Contract\Manager\Api\FlightManagerInterface:
+        alias: 'App\Manager\Api\FlightManager'
+        public: true
+    #endregion
