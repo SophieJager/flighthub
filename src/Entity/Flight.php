@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Entity\Api;
+namespace App\Entity;
 
-use App\Entity\AbstractEntity;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 /**
  * Class Flight
- * @package App\Entity\Api
- * @ORM\Entity(repositoryClass="App\Repository\Api\FlightRepository")
+ * @package App\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\FlightRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Flight extends AbstractEntity
 {
     /**
      * @var Airline
-     * @ORM\ManyToOne(targetEntity="App\Entity\Api\Airline")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Airline")
      * @ORM\JoinColumn(nullable=false)
      */
     private $airline;
@@ -27,7 +26,7 @@ class Flight extends AbstractEntity
     private $number;
     /**
      * @var Airport
-     * @ORM\ManyToOne(targetEntity="App\Entity\Api\Airport")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Airport")
      * @ORM\JoinColumn(nullable=false)
      */
     private $departureAirport;
@@ -38,7 +37,7 @@ class Flight extends AbstractEntity
     private $departureTime;
     /**
      * @var Airport
-     * @ORM\ManyToOne(targetEntity="App\Entity\Api\Airport")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Airport")
      * @ORM\JoinColumn(nullable=false)
      */
     private $arrivalAirport;

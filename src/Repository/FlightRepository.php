@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Api;
+namespace App\Repository;
 
-use App\Entity\Api\Flight;
+use App\Entity\Flight;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

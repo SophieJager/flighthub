@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Manager\Api;
+namespace App\Manager;
 
-use App\Contract\Manager\Api\FlightManagerInterface;
-use App\Entity\Api\Flight;
-use App\Manager\AbstractManager;
-use App\Repository\Api\FlightRepository;
-use InvalidArgumentException;
+use App\Contract\Manager\FlightManagerInterface;
+use App\Entity\Flight;
+use App\Repository\FlightRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class FlightManager extends AbstractManager implements FlightManagerInterface

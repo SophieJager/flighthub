@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Manager\Api;
+namespace App\Manager;
 
-use App\Contract\Manager\Api\AirportManagerInterface;
-use App\Entity\Api\Airport;
-use App\Manager\AbstractManager;
-use App\Repository\Api\AirportRepository;
-use InvalidArgumentException;
+use App\Contract\Manager\AirportManagerInterface;
+use App\Entity\Airport;
+use App\Repository\AirportRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AirportManager extends AbstractManager implements AirportManagerInterface

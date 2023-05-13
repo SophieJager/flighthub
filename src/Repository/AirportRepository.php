@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Repository\Api;
+namespace App\Repository;
 
-use App\Entity\Api\Airline;
+use App\Entity\Airport;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Airline>
+ * @extends ServiceEntityRepository<Airport>
  *
- * @method Airline|null find($id, $lockMode = null, $lockVersion = null)
- * @method Airline|null findOneBy(array $criteria, array $orderBy = null)
- * @method Airline[]    findAll()
- * @method Airline[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Airport|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Airport|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Airport[]    findAll()
+ * @method Airport[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AirlineRepository extends ServiceEntityRepository
+class AirportRepository extends ServiceEntityRepository
 {
     /**
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Airline::class);
+        parent::__construct($registry, Airport::class);
     }
 
     /**
-     * @param Airline $entity
+     * @param Airport $entity
      * @param bool $flush
      * @return void
      */
-    public function createOrUpdate(Airline $entity, bool $flush = false): void
+    public function createOrUpdate(Airport $entity, bool $flush = false): void
     {
         /** @var int|null $id */
         $id = $entity->getId();
@@ -43,11 +43,11 @@ class AirlineRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Airline $entity
+     * @param Airport $entity
      * @param bool $flush
      * @return void
      */
-    public function remove(Airline $entity, bool $flush = false): void
+    public function remove(Airport $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

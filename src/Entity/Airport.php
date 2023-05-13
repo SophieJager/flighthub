@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Entity\Api;
+namespace App\Entity;
 
-use App\Entity\AbstractEntity;
-use App\Traits\CodeAndNameTrait;
 use Doctrine\ORM\Mapping as ORM;
+use App\Traits\CodeAndNameTrait;
 
 /**
  * Class Airport
- * @package App\Entity\Api
- * @ORM\Entity(repositoryClass="App\Repository\Api\AirportRepository")
+ * @package App\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AirportRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Airport extends AbstractEntity
@@ -18,7 +17,7 @@ class Airport extends AbstractEntity
 
     /**
      * @var City
-     * @ORM\ManyToOne(targetEntity="App\Entity\Api\City")
+     * @ORM\ManyToOne(targetEntity="App\Entity\City")
      * @ORM\JoinColumn(nullable=false)
      */
     private $city;

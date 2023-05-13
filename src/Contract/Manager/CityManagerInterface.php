@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contract\Manager\Api;
+namespace App\Contract\Manager;
 
-use App\Entity\Api\City;
+use App\Entity\City;
 
 interface CityManagerInterface
 {

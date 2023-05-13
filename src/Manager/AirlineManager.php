@@ -1,33 +1,32 @@
 <?php
 
-namespace App\Manager\Api;
+namespace App\Manager;
 
-use App\Contract\Manager\Api\CityManagerInterface;
-use App\Entity\Api\City;
-use App\Manager\AbstractManager;
-use App\Repository\Api\CityRepository;
-use InvalidArgumentException;
+use App\Contract\Manager\AirlineManagerInterface;
+use App\Entity\Airline;
+use App\Repository\AirlineRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class CityManager extends AbstractManager implements CityManagerInterface
+class AirlineManager extends AbstractManager implements AirlineManagerInterface
 {
     /**
-     * @var CityRepository $repository
+     * @var AirlineRepository $repository
      */
     protected $repository;
 
     public function __construct(EntityManagerInterface $entityManager, ValidatorInterface $validator)
     {
-        $repo = $entityManager->getRepository(CityManager::class);
-        if (!$repo instanceof CityRepository) {
+        $repo = $entityManager->getRepository(AirlineManager::class);
+        if (!$repo instanceof AirlineRepository) {
             throw new InvalidArgumentException(sprintf(
                 'The repository class for "%s" must be "%s" and given "%s"! ' .
                 'Maybe look the "repositoryClass" declaration on %s ?',
-                City::class,
-                CityRepository::class,
+                Airline::class,
+                AirlineRepository::class,
                 get_class($repo),
-                City::class
+                Airline::class
             ));
         }
         $this->repository = $repo;
@@ -35,12 +34,12 @@ class CityManager extends AbstractManager implements CityManagerInterface
     }
 
     /**
-     * @param City $city
+     * @param Airline $airline
      * @param bool $flush
      * @return void
      */
-    public function createOrUpdate(City $city, bool $flush = true): void
+    public function createOrUpdate(Airline $airline, bool $flush = true): void
     {
-        $this->repository->createOrUpdate($city, $flush);
+        $this->repository->createOrUpdate($airline, $flush);
     }
 }

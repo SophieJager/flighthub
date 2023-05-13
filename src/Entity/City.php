@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Entity\Api;
+namespace App\Entity;
 
-use App\Entity\AbstractEntity;
-use App\Traits\CodeAndNameTrait;
 use Doctrine\ORM\Mapping as ORM;
+use App\Traits\CodeAndNameTrait;
 
 /**
  * Class City
- * @package App\Entity\Api
- * @ORM\Entity(repositoryClass="App\Repository\Api\CityRepository")
+ * @package App\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CityRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class City extends AbstractEntity

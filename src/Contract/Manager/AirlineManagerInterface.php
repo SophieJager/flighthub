@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contract\Manager\Api;
+namespace App\Contract\Manager;
 
-use App\Entity\Api\Airline;
+use App\Entity\Airline;
 
 interface AirlineManagerInterface
 {

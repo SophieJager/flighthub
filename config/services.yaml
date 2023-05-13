@@ -24,16 +24,28 @@ services:
     # please note that last definitions always *replace* previous ones
 
     #region Manager
-    App\Contract\Manager\Api\AirlineManagerInterface:
-        alias: 'App\Manager\Api\AirlineManager'
+    App\Contract\Manager\AirlineManagerInterface:
+        alias: 'App\Manager\AirlineManager'
         public: true
-    App\Contract\Manager\Api\AirportManagerInterface:
-        alias: 'App\Manager\Api\AirportManager'
+    App\Contract\Manager\AirportManagerInterface:
+        alias: 'App\Manager\AirportManager'
         public: true
-    App\Contract\Manager\Api\CityManagerInterface:
-        alias: 'App\Manager\Api\CityManager'
+    App\Contract\Manager\CityManagerInterface:
+        alias: 'App\Manager\CityManager'
         public: true
-    App\Contract\Manager\Api\FlightManagerInterface:
-        alias: 'App\Manager\Api\FlightManager'
+    App\Contract\Manager\FlightManagerInterface:
+        alias: 'App\Manager\FlightManager'
         public: true
+    #endregion
+
+    #region Api
+    flight_filters:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { airline: exact } ]
+        tags: [ 'api_platform.filter' ]
+        # The following are mandatory only if a _defaults section is defined
+        # You may want to isolate filters in a dedicated file to avoid adding them
+        autowire: false
+        autoconfigure: false
+        public: false
     #endregion

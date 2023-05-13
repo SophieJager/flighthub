@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Repository\Api;
+namespace App\Repository;
 
-use App\Entity\Api\City;
+use App\Entity\Airline;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<City>
+ * @extends ServiceEntityRepository<Airline>
  *
- * @method City|null find($id, $lockMode = null, $lockVersion = null)
- * @method City|null findOneBy(array $criteria, array $orderBy = null)
- * @method City[]    findAll()
- * @method City[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Airline|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Airline|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Airline[]    findAll()
+ * @method Airline[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CityRepository extends ServiceEntityRepository
+class AirlineRepository extends ServiceEntityRepository
 {
     /**
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, City::class);
+        parent::__construct($registry, Airline::class);
     }
 
     /**
-     * @param City $entity
+     * @param Airline $entity
      * @param bool $flush
      * @return void
      */
-    public function createOrUpdate(City $entity, bool $flush = false): void
+    public function createOrUpdate(Airline $entity, bool $flush = false): void
     {
         /** @var int|null $id */
         $id = $entity->getId();
@@ -43,11 +43,11 @@ class CityRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param City $entity
+     * @param Airline $entity
      * @param bool $flush
      * @return void
      */
-    public function remove(City $entity, bool $flush = false): void
+    public function remove(Airline $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
