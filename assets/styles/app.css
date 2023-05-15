@@ -1,0 +1,8 @@
+body {
+    background-color: lightgray;
+}
+
+.filter-form {
+   display: flex;
+    flex-direction: row;
+}

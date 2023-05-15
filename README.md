@@ -30,6 +30,7 @@ in the `docker-compose.yml` file) and setup database structure with migrations, 
 
 You'll certainly be prompted for some consumer key / secret from git during composer install. Just generate and tape it, it'll not ask again in the future.
 
+https://docs.docker.com/engine/install/linux-postinstall/
 ## Development
 
 ### Starting Project

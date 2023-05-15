@@ -20,6 +20,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
@@ -39,8 +43,13 @@ services:
     #endregion
 
     #region Api
-    flight_filters:
-        parent: 'api_platform.doctrine.orm.search_filter'
+#    App\DataProvider\TripCollectionDataProvider:
+#        tags: [ { name: 'api_platform.collection_data_provider', priority: 1 } ]
+#        # Autoconfiguration must be disabled to set a custom priority
+#        autoconfigure: true
+
+    trip_filters:
+        class: 'App\Filter\TripFilter'
         arguments: [ { airline: exact } ]
         tags: [ 'api_platform.filter' ]
         # The following are mandatory only if a _defaults section is defined

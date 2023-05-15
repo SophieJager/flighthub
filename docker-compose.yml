@@ -47,6 +47,13 @@ services:
       - php
       - database
 
+  yarn:
+    build: ./docker/yarn
+    user: "${HOST_UID:-1000}:${HOST_GROUP_ID:-1000}"
+    volumes:
+      - ./:/home/node/app
+      - ~/.ssh:/home/node/.ssh
+
 volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
