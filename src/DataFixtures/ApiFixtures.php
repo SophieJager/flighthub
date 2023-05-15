@@ -2,10 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Api\Airline;
-use App\Entity\Api\Airport;
-use App\Entity\Api\City;
-use App\Entity\Api\Flight;
+use App\Entity\Airline;
+use App\Entity\Airport;
+use App\Entity\City;
+use App\Entity\Flight;
 use DateTimeImmutable;
 use DateTimeZone;
 use Doctrine\Bundle\FixturesBundle\Fixture;
