@@ -1,0 +1,19 @@
+grumphp:
+    git_hook_variables:
+        EXEC_GRUMPHP_COMMAND: 'docker-compose run --rm --no-deps php'
+    ascii:
+        failed: ~
+        succeeded: ~
+    ignore_unstaged_changes: false
+    tasks:
+        composer: ~
+        phplint: ~
+        phpcs: ~
+        phpstan:
+            configuration: phpstan.neon
+            level: null
+        yamllint:
+            parse_constant: true
+        shell:
+            scripts:
+                - ["-c", "bin/console doctrine:schema:validate"]

@@ -1,0 +1,11 @@
+parameters:
+  level: 8
+  paths:
+    - src/
+    - app/config
+    - app/Resources
+  excludes_analyse:
+    - %currentWorkingDirectory%/src/Doctrine/Migrations/*
+  ignoreErrors:
+  checkGenericClassInNonGenericObjectType: false
+  checkMissingIterableValueType: false

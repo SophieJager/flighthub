@@ -20,5 +20,27 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    #region Manager
+    App\Contract\Manager\AirlineManagerInterface:
+        alias: 'App\Manager\AirlineManager'
+        public: true
+    App\Contract\Manager\AirportManagerInterface:
+        alias: 'App\Manager\AirportManager'
+        public: true
+    App\Contract\Manager\CityManagerInterface:
+        alias: 'App\Manager\CityManager'
+        public: true
+    App\Contract\Manager\FlightManagerInterface:
+        alias: 'App\Manager\FlightManager'
+        public: true
+    #endregion
+
+    #region Api
+    #endregion
