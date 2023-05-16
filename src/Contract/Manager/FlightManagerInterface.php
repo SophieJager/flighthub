@@ -2,8 +2,9 @@
 
 namespace App\Contract\Manager;
 
-use App\Dto\Filter\FlightFilterDto;
+use App\Dto\Filter\TripFilterDto;
 use App\Entity\Flight;
+use Doctrine\Common\Collections\Collection;
 
 interface FlightManagerInterface
 {
@@ -15,8 +16,14 @@ interface FlightManagerInterface
     public function createOrUpdate(Flight $flight, bool $flush = true): void;
 
     /**
-     * @param FlightFilterDto $dto
+     * @param TripFilterDto $dto
      * @return ?Flight
      */
-    public function findOneWithFilters(FlightFilterDto $dto): ?Flight;
+    public function findOneWithFilters(TripFilterDto $dto): ?Flight;
+
+    /**
+     * @param TripFilterDto $dto
+     * @return Collection|Flight[]
+     */
+    public function findRoundTripWithFilters(TripFilterDto $dto): Collection;
 }

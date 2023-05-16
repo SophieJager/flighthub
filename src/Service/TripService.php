@@ -29,76 +29,28 @@ class TripService implements TripServiceInterface
     public function findTrips(TripFilterDto $dto): Collection
     {
         $trips = new ArrayCollection();
-
-        $flights = $this->getDirectFlights($dto);
         $price = 0;
-        foreach ($flights as $flight) {
-            $price += $flight->price;
-        }
-
-        $trips->add(new Trip($price, $flights));
-        return $trips;
-    }
-
-    /**
-     * @param TripFilterDto $dto
-     * @return Collection|FlightDto[]
-     */
-    private function getDirectFlights(TripFilterDto $dto): Collection
-    {
-        $flights = new ArrayCollection();
-        $f = $this->getDirectFlight(
-            $dto->airline,
-            $dto->date,
-            $dto->departureAirport,
-            $dto->arrivalAirport
-        );
-        if ($f === null) {
-            return new ArrayCollection();
-        }
-        $flights->add($f);
-
+        $flightsDto = new ArrayCollection();
         if ($dto->tripType === TripTypeEnum::ROUND_TRIP) {
-            $returnFlight = $this->getDirectFlight(
-                $dto->airline,
-                $dto->returnDate,
-                $dto->arrivalAirport,
-                $dto->departureAirport
-            );
-            if ($returnFlight === null) {
-                return new ArrayCollection();
+            $flights = $this->manager->findRoundTripWithFilters($dto);
+            foreach ($flights as $flight) {
+                $flightDto = $this->transformToFlightDto($flight);
+                $price += $flightDto->price;
+                $flightsDto->add($flightDto);
             }
-            $flights->add($returnFlight);
-        }
-        return $flights;
-    }
-
-    /**
-     * @param string|null $airline
-     * @param DateTimeImmutable|null $departureDate
-     * @param string|null $departureAirport
-     * @param string|null $arrivalAirport
-     * @return FlightDto|null
-     */
-    private function getDirectFlight(
-        ?string $airline,
-        ?DateTimeImmutable $departureDate,
-        ?string $departureAirport,
-        ?string $arrivalAirport
-    ): ?FlightDto {
-        $flightFilter = new FlightFilterDto(
-            $airline,
-            $departureAirport,
-            $arrivalAirport,
-            $departureDate
-        );
-
-        $flight = $this->manager->findOneWithFilters($flightFilter);
-        if ($flight === null) {
-            return null;
+        } else {
+            $flight = $this->manager->findOneWithFilters($dto);
+            if ($flight === null) {
+                return $trips;
+            }
+            $flightDto = $this->transformToFlightDto($flight);
+            /** @var float $price */
+            $price = $flightDto->price;
+            $flightsDto->add($flightDto);
         }
 
-        return $this->transformToFlightDto($flight);
+        $trips->add(new Trip($price, $flightsDto));
+        return $trips;
     }
 
     /**
