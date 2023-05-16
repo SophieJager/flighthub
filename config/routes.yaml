@@ -15,3 +15,8 @@ api_platform:
     resource: .
     type: api_platform
     prefix: /api
+
+api_flights:
+    controller: App\Controller\TripController::searchFlights
+    path: /api/search_flights
+    methods: [GET]

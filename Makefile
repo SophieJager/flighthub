@@ -2,7 +2,7 @@ DOCKER_COMPOSE = docker-compose -f docker-compose.yml
 
 install: ## First Install of the project : build container, install component, build database and run fixtures
 	$(DOCKER_COMPOSE) pull
-	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) build --no-cache
 	$(DOCKER_COMPOSE) run --rm php bash -ci 'composer install'
 	$(MAKE) yarn-install
 	$(MAKE) assets-install

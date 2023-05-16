@@ -82,6 +82,17 @@ class ApiFixtures extends Fixture
             'America/Vancouver'
         );
         $manager->persist($airport);
+        $city = $this->createCity('FRPA', 'Paris', 'FR', 'NA');
+        $manager->persist($city);
+        $airport = $this->createAirport(
+            'CDG',
+            'Paris Charles de Gaulles',
+            $city,
+            49.0079,
+            2.5508,
+            'Europe/Paris'
+        );
+        $manager->persist($airport);
     }
 
     /**
@@ -92,49 +103,90 @@ class ApiFixtures extends Fixture
     public function generateFlights(ObjectManager $manager): void
     {
         $airlineRepo = $manager->getRepository(Airline::class);
-        /** @var Airline $airline */
-        $airline = $airlineRepo->findOneBy(array('code' => 'AC'));
+        /** @var Airline $airCanada */
+        $airCanada = $airlineRepo->findOneBy(array('code' => 'AC'));
+        /** @var Airline $airFrance */
+        $airFrance = $airlineRepo->findOneBy(array('code' => 'AF'));
         $airportRepo = $manager->getRepository(Airport::class);
-        /** @var Airport $departureAirport */
-        $departureAirport = $airportRepo->findOneBy(array('code' => 'YUL'));
-        /** @var Airport $arrivalAirport */
-        $arrivalAirport = $airportRepo->findOneBy(array('code' => 'YVR'));
+        /** @var Airport $yulAirport */
+        $yulAirport = $airportRepo->findOneBy(array('code' => 'YUL'));
+        /** @var Airport $yvrAirport */
+        $yvrAirport = $airportRepo->findOneBy(array('code' => 'YVR'));
+        /** @var Airport $cdgAirport */
+        $cdgAirport = $airportRepo->findOneBy(array('code' => 'CDG'));
         $today = new DateTimeImmutable();
         for ($i = 0; $i < 100; $i++) {
             $departureDate = $today
-                ->setTimezone(new DateTimeZone($departureAirport->getTimezone()))
+                ->setTimezone(new DateTimeZone($yulAirport->getTimezone()))
                 ->setTime(7, 35)
                 ->modify('+' . $i . ' days');
             $arrivalDate = $today
-                ->setTimezone(new DateTimeZone($arrivalAirport->getTimezone()))
+                ->setTimezone(new DateTimeZone($yvrAirport->getTimezone()))
                 ->setTime(10, 05)
                 ->modify('+' . $i . ' days');
             $flight = $this->createFlight(
-                $airline,
+                $airCanada,
                 301,
-                $departureAirport,
+                $yulAirport,
                 $departureDate,
-                $arrivalAirport,
+                $yvrAirport,
                 $arrivalDate,
                 273.23
             );
             $manager->persist($flight);
             $departureDate = $today
-                ->setTimezone(new DateTimeZone($arrivalAirport->getTimezone()))
+                ->setTimezone(new DateTimeZone($yvrAirport->getTimezone()))
                 ->setTime(11, 30)
                 ->modify('+' . $i . ' days');
             $arrivalDate = $today
-                ->setTimezone(new DateTimeZone($departureAirport->getTimezone()))
+                ->setTimezone(new DateTimeZone($yulAirport->getTimezone()))
                 ->setTime(19, 11)
                 ->modify('+' . $i . ' days');
             $flight = $this->createFlight(
-                $airline,
+                $airCanada,
                 302,
-                $departureAirport,
+                $yvrAirport,
                 $departureDate,
-                $arrivalAirport,
+                $yulAirport,
                 $arrivalDate,
                 220.63
+            );
+            $manager->persist($flight);
+            $departureDate = $today
+                ->setTimezone(new DateTimeZone($cdgAirport->getTimezone()))
+                ->setTime(10, 30)
+                ->modify('+' . $i . ' days');
+            $arrivalDate = $today
+                ->setTimezone(new DateTimeZone($yulAirport->getTimezone()))
+                ->setTime(12, 05)
+                ->modify('+' . $i . ' days');
+            $flight = $this->createFlight(
+                $airFrance,
+                660,
+                $cdgAirport,
+                $departureDate,
+                $yulAirport,
+                $arrivalDate,
+                1500.68
+            );
+            $manager->persist($flight);
+            $departureDate = $today
+                ->setTimezone(new DateTimeZone($yulAirport->getTimezone()))
+                ->setTime(17, 00)
+                ->modify('+' . $i . ' days');
+            $j = $i + 1;
+            $arrivalDate = $today
+                ->setTimezone(new DateTimeZone($cdgAirport->getTimezone()))
+                ->setTime(5, 50)
+                ->modify('+' . $j . ' days');
+            $flight = $this->createFlight(
+                $airFrance,
+                661,
+                $yulAirport,
+                $departureDate,
+                $cdgAirport,
+                $arrivalDate,
+                1458.25
             );
             $manager->persist($flight);
         }

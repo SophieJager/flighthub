@@ -3,7 +3,7 @@ version: '3.3'
 services:
   ###> doctrine/doctrine-bundle ###
   database:
-    container_name: database
+    container_name: trip_builder_database
     ports:
       - "5432:5432"
     healthcheck:
@@ -23,11 +23,11 @@ services:
        - ./docker/db/data:/var/lib/postgresql/data:rw
   ###< doctrine/doctrine-bundle ###
   php:
-    container_name: php
+    container_name: trip_builder_php
     build:
       context: ./docker/php
     ports:
-      - '9000:9000'
+      - '9001:9001'
     volumes:
       - ./:/var/www/trip_builder
     links:
@@ -36,7 +36,7 @@ services:
       - database
 
   nginx:
-    container_name: nginx
+    container_name: trip_builder_nginx
     image: nginx:stable-alpine
     ports:
       - '8080:80'
@@ -52,7 +52,7 @@ services:
     user: "${HOST_UID:-1000}:${HOST_GROUP_ID:-1000}"
     volumes:
       - ./:/home/node/app
-      - ~/.ssh:/home/node/.ssh
+#      - ~/.ssh:/home/node/.ssh
 
 volumes:
 ###> doctrine/doctrine-bundle ###
